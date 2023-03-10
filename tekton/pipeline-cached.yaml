@@ -10,14 +10,14 @@ spec:
     - default: geluyan/quinoa-wind-turbine
       name: IMAGE_NAME
       type: string
-    - default: 'https://github.com/redhat-developer-demos/quinoa-wind-turbine.git'
+    - default: 'https://github.com/geluyan/quinoa-wind-turbine.git'
       name: GIT_REPO
       type: string
     - default: main
       name: GIT_BRANCH
       type: string
     - default: >-
-        https://github.com/redhat-developer-demos/quinoa-wind-turbine-manifests.git
+        https://github.com/geluyan/quinoa-wind-turbine-manifests.git
       name: MANIFESTS_GIT_REPO
       type: string
     - default: main
@@ -34,10 +34,6 @@ spec:
           value: 'true'
         - name: depth
           value: '1'
-        - name: sslVerify
-          value: 'true'
-        - name: crtFileName
-          value: ca-bundle.crt
         - name: deleteExisting
           value: 'true'
         - name: verbose
