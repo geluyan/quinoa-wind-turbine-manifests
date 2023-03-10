@@ -1,0 +1,41 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: wind-turbine-pipeline
+  namespace: demo
+  labels:
+    tekton.dev/pipeline: wind-turbine-pipeline
+spec:
+  params:
+    - name: IMAGE_TAG
+      value: 1.0.0
+    - name: IMAGE_NAME
+      value: geluyan/quinoa-wind-turbine
+    - name: GIT_REPO
+      value: 'https://github.com/geluyan/quinoa-wind-turbine.git'
+    - name: GIT_BRANCH
+      value: main
+    - name: MANIFESTS_GIT_REPO
+      value: 'https://github.com/geluyan/quinoa-wind-turbine-manifests.git'
+    - name: MANIFESTS_GIT_BRANCH
+      value: main
+  pipelineRef:
+    name: wind-turbine-pipeline
+  serviceAccountName: pipeline
+  timeout: 1h0m0s
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: app-source
+    - persistentVolumeClaim:
+        claimName: build-cache-pvc
+      name: maven-settings
+    - persistentVolumeClaim:
+        claimName: build-cache-pvc
+      name: maven-repo
+    - persistentVolumeClaim:
+        claimName: build-cache-pvc
+      name: node-cache
+    - persistentVolumeClaim:
+        claimName: build-cache-pvc
+      name: npm-repo

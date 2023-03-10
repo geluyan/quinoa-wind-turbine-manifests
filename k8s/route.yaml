@@ -22,3 +22,24 @@ spec:
     name: quinoa-wind-turbine
     weight: 100
   wildcardPolicy: None
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: quinoa-wind-turbine-external
+  annotations:
+    cert-manager.io/issuer-kind: ClusterIssuer
+    cert-manager.io/issuer-name: letsencrypt
+spec:
+  host: quinoa-wind-turbine.infusion.dev
+  path: /
+  to:
+    kind: Service
+    name: quinoa-wind-turbine
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

@@ -61,7 +61,7 @@ spec:
         - name: CONTEXT_DIR
           value: .
         - name: MAVEN_IMAGE
-          value: 'maven:3.8.6-openjdk-18'
+          value: 'quay.io/rhdevelopers/maven-nodejs:latest'
       runAfter:
         - git-clone
       taskRef:
